@@ -102,6 +102,7 @@ mod tls;
 mod transport;
 
 pub use self::error::Error;
+pub use self::error::FakeError;
 pub use self::filter::Filter;
 // This otherwise shows a big dump of re-exports in the doc homepage,
 // with zero context, so just hide it from the docs. Doc examples

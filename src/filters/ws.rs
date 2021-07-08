@@ -231,13 +231,7 @@ impl Sink<Message> for WebSocket {
     }
 
     fn start_send(mut self: Pin<&mut Self>, item: Message) -> Result<(), Self::Error> {
-        match Pin::new(&mut self.inner).start_send(item.inner) {
-            Ok(()) => Ok(()),
-            Err(e) => {
-                tracing::debug!("websocket start_send error: {}", e);
-                Err(crate::Error::new(e))
-            }
-        }
+        Err(crate::Error::new(crate::FakeError))
     }
 
     fn poll_flush(mut self: Pin<&mut Self>, cx: &mut Context) -> Poll<Result<(), Self::Error>> {

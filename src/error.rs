@@ -3,11 +3,25 @@ use std::error::Error as StdError;
 use std::fmt;
 
 type BoxError = Box<dyn std::error::Error + Send + Sync>;
-
+/// Fake error
+#[derive(Debug, Clone)]
+pub struct FakeError;
 /// Errors that can happen inside warp.
 pub struct Error {
     inner: BoxError,
 }
+
+impl StdError for FakeError {
+
+}
+
+impl fmt::Display for FakeError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "Faked error")
+    }
+}
+
+
 
 impl Error {
     pub(crate) fn new<E: Into<BoxError>>(err: E) -> Error {
